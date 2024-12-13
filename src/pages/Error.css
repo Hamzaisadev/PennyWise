@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+:root {
+  --blue: #0e0620;
+  --white: #fff;
+  --green: #2ccf6d;
+}
+
+.main_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito Sans";
+  color: var(--blue);
+  font-size: 1em;
+  text-align: center;
+}
+.main_wrapper button {
+  font-family: "Nunito Sans";
+}
+.main_wrapper ul {
+  list-style-type: none;
+  padding-inline-start: 35px;
+}
+
+.main_wrapper h1 {
+  font-size: 5em;
+
+  font-weight: bold;
+}
+.main_wrapper h2 {
+  font-size: 2.5em;
+  font-weight: 900;
+}
+.main_wrapper p {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.main_wrapper .svgCont svg {
+  width: 800px;
+}
+.main_wrapper .row {
+  display: flex;
+  gap: 90px;
+}
+
+@media screen and (max-width: 768px) {
+  .main_wrapper .container {
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+  .main_wrapper .row {
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+}
