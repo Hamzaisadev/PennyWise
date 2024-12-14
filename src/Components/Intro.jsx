@@ -22,7 +22,12 @@ const Intro = () => {
             aria-label="Your Name"
             autoComplete="given-name"
           />
-          <button type="submit" className="btn btn--dark">
+          <input type="hidden" name="_action" value="newUser" />
+          <button
+            type="submit"
+            className="btn btn--dark"
+            disabled={isSubmitting}
+          >
             <span>Create Account</span>
             <UserPlusIcon width={22} />
           </button>
