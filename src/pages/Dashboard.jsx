@@ -1,13 +1,14 @@
 import { useLoaderData } from "react-router-dom";
-import { createBudget, fetchData, wait } from "../helper";
+import { createBudget, createExpense, fetchData, wait } from "../helper";
 import Intro from "../Components/Intro";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../Components/AddBudgetForm";
+import AddExpenseForm from "../Components/AddExpenseForm";
 
 export function DashboardLoader() {
   const userName = fetchData("userName");
-  const budget = fetchData("budget");
-  return { userName, budget };
+  const budgets = fetchData("budgets");
+  return { userName, budgets };
 }
 
 export async function DashboardAction({ request }) {
@@ -26,15 +27,43 @@ export async function DashboardAction({ request }) {
       throw error;
     }
   }
+
   if (_action === "createBudget") {
     createBudget({
       name: values.newBudget,
       amount: values.newBudgetAmount,
     });
     try {
-      return toast.success(`Budget  Is Created`);
+      console.log(values);
+      return toast.success(
+        <span>
+          The budget <span className="accent">{values.newBudget}</span> was
+          created at Rs.{" "}
+          <span className="accent">{values.newBudgetAmount}</span>/-
+        </span>
+      );
     } catch (e) {
       const error = new Error("There was a problem creating your budget");
+      error.code = "500";
+      throw error;
+    }
+  }
+  if (_action === "createExpense") {
+    try {
+      createExpense({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+        budgetId: values.newExpenseBudget,
+      });
+      return toast.success(
+        <span>
+          The Expense <span className="accent">{values.newExpense}</span> was
+          created at Rs.{" "}
+          <span className="accent">{values.newExpenseAmount}</span>/-
+        </span>
+      );
+    } catch (e) {
+      const error = new Error("There was a problem creating your Expense");
       error.code = "500";
       throw error;
     }
@@ -42,23 +71,30 @@ export async function DashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budget } = useLoaderData();
+  const { userName, budgets } = useLoaderData();
 
   return (
     <>
       {userName ? (
         <div className="dashboard">
           <h1>
-            Welcome Back , <span className="accent">{userName}</span>
+            Welcome back, <span className="accent">{userName}</span>
           </h1>
-
           <div className="grid-sm">
-            {/* {budget ? () : ()} */}
-            <div className="grid-lg">
-              <div className="flex-lg">
+            {budgets && budgets.length > 0 ? (
+              <div className="grid-lg">
+                <div className="flex-lg">
+                  <AddBudgetForm />
+                  <AddExpenseForm budgets={budgets} />
+                </div>
+              </div>
+            ) : (
+              <div className="grid-sm">
+                <p>Personal budgeting is the secret to financial freedom.</p>
+                <p>Create a budget to get started!</p>
                 <AddBudgetForm />
               </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (

@@ -23,11 +23,7 @@ const Intro = () => {
             autoComplete="given-name"
           />
           <input type="hidden" name="_action" value="newUser" />
-          <button
-            type="submit"
-            className="btn btn--dark"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="btn btn--dark">
             <span>Create Account</span>
             <UserPlusIcon width={22} />
           </button>
