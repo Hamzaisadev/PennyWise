@@ -4,6 +4,7 @@ import Intro from "../Components/Intro";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../Components/AddBudgetForm";
 import AddExpenseForm from "../Components/AddExpenseForm";
+import BudgetItem from "../Components/BudgetItem";
 
 export function DashboardLoader() {
   const userName = fetchData("userName");
@@ -55,6 +56,7 @@ export async function DashboardAction({ request }) {
         amount: values.newExpenseAmount,
         budgetId: values.newExpenseBudget,
       });
+      console.log(values);
       return toast.success(
         <span>
           The Expense <span className="accent">{values.newExpense}</span> was
@@ -86,6 +88,12 @@ const Dashboard = () => {
                 <div className="flex-lg">
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
+                </div>
+                <h2>Existing Budgets</h2>
+                <div className="budgets">
+                  {budgets.map((budget) => (
+                    <BudgetItem key={budget.id} budget={budget} />
+                  ))}
                 </div>
               </div>
             ) : (
