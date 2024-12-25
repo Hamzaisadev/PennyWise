@@ -48,7 +48,7 @@ const AddBudgetForm = () => {
           />
         </div>
         <div className="grid-xs">
-          <label htmlFor="newBudgetAmount">Budget Name</label>
+          <label htmlFor="newBudgetAmount">Budget Amount</label>
           <input
             type="text"
             value={amount}

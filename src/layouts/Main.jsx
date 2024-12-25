@@ -1,8 +1,8 @@
 import { Outlet, useLoaderData } from "react-router-dom";
-import { fetchData } from "../../helper";
+import { fetchData } from "../helper";
 
-import wave from "..//../assets/wave.svg";
-import Nav from "../../Components/Nav";
+import wave from "..//assets/wave.svg";
+import Nav from "../Components/Nav";
 
 export function mainLoader() {
   const userName = fetchData("userName");

@@ -1,5 +1,11 @@
-import { useLoaderData } from "react-router-dom";
-import { createBudget, createExpense, fetchData, wait } from "../helper";
+import { Link, useLoaderData } from "react-router-dom";
+import {
+  createBudget,
+  createExpense,
+  deleteItem,
+  fetchData,
+  wait,
+} from "../helper";
 import Intro from "../Components/Intro";
 import { toast } from "react-toastify";
 import AddBudgetForm from "../Components/AddBudgetForm";
@@ -17,8 +23,8 @@ export function DashboardLoader() {
 export async function DashboardAction({ request }) {
   await wait();
   const data = await request.formData();
-  const { _action, ...values } = Object.fromEntries(data);
-  console.log(_action);
+  const { _action, newExpenseColor, ...values } = Object.fromEntries(data);
+
   if (_action === "newUser") {
     try {
       localStorage.setItem("userName", JSON.stringify(values.userName));
@@ -53,11 +59,13 @@ export async function DashboardAction({ request }) {
   }
   if (_action === "createExpense") {
     try {
-      createExpense({
-        name: values.newExpense,
-        amount: values.newExpenseAmount,
-        budgetId: values.newExpenseBudget,
-      });
+      console.log("Create expense:", values),
+        createExpense({
+          name: values.newExpense,
+          amount: values.newExpenseAmount,
+          budgetId: values.newExpenseBudget,
+          color: values.newExpenseColor,
+        });
       console.log(values);
       return toast.success(
         <span>
@@ -70,6 +78,17 @@ export async function DashboardAction({ request }) {
       const error = new Error("There was a problem creating your Expense");
       error.code = "500";
       throw error;
+    }
+  }
+  if (_action === "deleteExpense") {
+    try {
+      deleteItem({
+        key: "expenses",
+        id: values.expenseId,
+      });
+      return toast.success("Expense deleted!");
+    } catch (e) {
+      throw new Error("There was a problem deleting your expense.");
     }
   }
 }
@@ -102,10 +121,15 @@ const Dashboard = () => {
                   <div className="grid-md">
                     <h2>Recent Expenses</h2>
                     <Table
-                      expenses={expenses.sort(
-                        (a, b) => b.createdAt - a.createdAt
-                      )}
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
                     />
+                    {expenses.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        Veiw all Expenses
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>

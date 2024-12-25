@@ -2,11 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard, { DashboardAction, DashboardLoader } from "./pages/Dashboard";
 import Error from "./pages/Error";
 import "./index.css";
-import Main, { mainLoader } from "./pages/layouts/Main";
+import Main, { mainLoader } from "./layouts/Main";
 import logoutAction from "./actions/logout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ExpensesPage, {
+  expenseAction,
+  ExpensesLoader,
+} from "./pages/ExpensesPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,12 +24,17 @@ const router = createBrowserRouter([
         action: DashboardAction,
         errorElement: <Error />,
       },
+      {
+        path: "expenses",
+        element: <ExpensesPage />,
+        loader: ExpensesLoader,
+        action: expenseAction,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
+      },
     ],
-  },
-
-  {
-    path: "logout",
-    action: logoutAction,
   },
 ]);
 

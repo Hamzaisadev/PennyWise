@@ -31,6 +31,7 @@ const AddExpenseForm = ({ budgets }) => {
     const formattedValue = formatAmount(rawValue);
     setAmount(formattedValue);
   };
+
   return (
     <div className="form-wrapper">
       <h2 className="h3">
@@ -53,7 +54,7 @@ const AddExpenseForm = ({ budgets }) => {
               ref={focusRef}
               required
             />
-            <label htmlFor="newExpenseAmount"> Expense Name</label>
+            <label htmlFor="newExpenseAmount"> Expense Amount</label>
             <input
               type="text"
               name="newExpenseAmount"
@@ -74,7 +75,11 @@ const AddExpenseForm = ({ budgets }) => {
               .sort((a, b) => a.createdAt - b.createdAt)
               .map((budget) => {
                 return (
-                  <option value={budget.id} key={budget.id}>
+                  <option
+                    data-color={budget.color}
+                    value={budget.id}
+                    key={budget.id}
+                  >
                     {budget.name}
                   </option>
                 );
