@@ -66,7 +66,6 @@ export async function DashboardAction({ request }) {
           budgetId: values.newExpenseBudget,
           color: values.newExpenseColor,
         });
-      console.log(values);
       return toast.success(
         <span>
           The Expense <span className="accent">{values.newExpense}</span> was
