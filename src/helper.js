@@ -34,15 +34,15 @@ export const createExpense = ({ name, amount, budgetId }) => {
     budgetId: budgetId,
     amount: amount,
   };
-  const existingExpenses = fetchData("Expenses") ?? [];
+  const existingExpenses = fetchData("expenses") ?? [];
   return localStorage.setItem(
-    "Expenses",
+    "expenses",
     JSON.stringify([...existingExpenses, newItem])
   );
 };
 
 export const calculateSpentByBudget = (budgetId) => {
-  const expenses = fetchData("Expenses") ?? [];
+  const expenses = fetchData("expenses") ?? [];
   const budgetSpent = expenses.reduce((acc, expense) => {
     if (expense.budgetId !== budgetId) return acc;
 
