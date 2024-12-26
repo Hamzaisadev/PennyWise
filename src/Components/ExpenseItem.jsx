@@ -23,7 +23,7 @@ const ExpenseItem = ({ expense, showBudget = true }) => {
           {" "}
           <Link
             className="btn"
-            to={`/budget/${budget.name}`}
+            to={`/budget/${budget.id}`}
             style={{ "--accent": budget.color }}
           >
             {budget.name}

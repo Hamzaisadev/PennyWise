@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: "budget/:name",
+        path: "budget/:id",
         element: <BudgetPage />,
         loader: budgetLoader,
         errorElement: <Error />,

@@ -1,9 +1,11 @@
 import { Link, useLoaderData } from "react-router-dom";
 import {
+  calculateSpentByBudget,
   createBudget,
   createExpense,
   deleteItem,
   fetchData,
+  getAllMatchingItems,
   wait,
 } from "../helper";
 import Intro from "../Components/Intro";
@@ -12,6 +14,7 @@ import AddBudgetForm from "../Components/AddBudgetForm";
 import AddExpenseForm from "../Components/AddExpenseForm";
 import BudgetItem from "../Components/BudgetItem";
 import Table from "../Components/Table";
+import { parseCurrency } from "../utils/format";
 
 export function DashboardLoader() {
   const userName = fetchData("userName");
@@ -43,7 +46,6 @@ export async function DashboardAction({ request }) {
       amount: values.newBudgetAmount,
     });
     try {
-      console.log(values);
       return toast.success(
         <span>
           The budget <span className="accent">{values.newBudget}</span> was
@@ -58,25 +60,39 @@ export async function DashboardAction({ request }) {
     }
   }
   if (_action === "createExpense") {
-    try {
-      console.log("Create expense:", values),
+    const amountInNum = parseCurrency(values.newExpenseAmount);
+    const spent = calculateSpentByBudget(values.newExpenseBudget);
+    const budget = getAllMatchingItems({
+      category: "budgets",
+      key: "id",
+      value: values.newExpenseBudget,
+    })[0];
+
+    const remainingAmount = parseCurrency(budget.amount) - spent;
+
+    if (remainingAmount < amountInNum) {
+      return toast.error(
+        "You do not have enough budget to create this expense."
+      );
+    } else {
+      try {
         createExpense({
           name: values.newExpense,
           amount: values.newExpenseAmount,
           budgetId: values.newExpenseBudget,
-          color: values.newExpenseColor,
         });
-      return toast.success(
-        <span>
-          The Expense <span className="accent">{values.newExpense}</span> was
-          created at Rs.{" "}
-          <span className="accent">{values.newExpenseAmount}</span>/-
-        </span>
-      );
-    } catch (e) {
-      const error = new Error("There was a problem creating your Expense");
-      error.code = "500";
-      throw error;
+        return toast.success(
+          <span>
+            The Expense <span className="accent">{values.newExpense}</span> was
+            created at Rs.{" "}
+            <span className="accent">{values.newExpenseAmount}</span>/-
+          </span>
+        );
+      } catch (e) {
+        const error = new Error("There was a problem creating your Expense");
+        error.code = "500";
+        throw error;
+      }
     }
   }
   if (_action === "deleteExpense") {

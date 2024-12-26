@@ -1,13 +1,33 @@
-import { deleteItem } from "../helper";
+import { toast } from "react-toastify";
+import { deleteItem, getAllMatchingItems } from "../helper";
+import { redirect } from "react-router-dom";
 
 export default function deleteBudget({ params }) {
   try {
+    console.log(params);
+
     deleteItem({
       key: "budgets",
-      id: params.name,
+      id: params.id,
     });
-    return toast.success("Budget deleted!");
+
+    const associatedExpenses = getAllMatchingItems({
+      category: "expenses",
+      key: "budgetId",
+      value: params.id,
+    });
+
+    associatedExpenses.forEach((expense) => {
+      deleteItem({
+        key: "expenses",
+        id: expense.id,
+      });
+    });
+
+    toast.success("Budget deleted!");
   } catch (e) {
     throw new Error("There was a problem deleting your Budget.");
   }
+
+  return redirect("/");
 }

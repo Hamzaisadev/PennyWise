@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 export async function budgetLoader({ params }) {
   const budget = await getAllMatchingItems({
     category: "budgets",
-    key: "name",
-    value: params.name,
+    key: "id",
+    value: params.id,
   })[0];
 
   const expenses = await getAllMatchingItems({
