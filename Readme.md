@@ -48,7 +48,7 @@ A personal budgeting application that helps users manage their finances effectiv
 
 ### For Adding Budgets.
 
-![Screenshot](src\assets\Pennywise\Create-budget-page.png)
+![Screenshot](./src\assets\Pennywise\Create-budget-page.png)
 
 ### Dashboard.
 
