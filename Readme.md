@@ -6,7 +6,7 @@ A personal budgeting application that helps users manage their finances effectiv
 
 ## Live Demo Link
 
-[https://pennywisse.netlify.app/](https://pennywisse.netlify.app/)
+[Live Demo](https://pennywisse.netlify.app/)
 
 ## Installation Instructions
 
@@ -42,9 +42,21 @@ A personal budgeting application that helps users manage their finances effectiv
 
 ## Screenshots/GIFs
 
-- ![Screenshot](link) for user registration.
-- ![Screenshot](link) for budget management.
-- ![Screenshot](link) for expense tracking.
+### For user registration.
+
+![Screenshot](src\assets\Pennywise\Homescreen.png)
+
+### For Adding Budgets.
+
+![Screenshot](src\assets\Pennywise\Create-budget-page.png)
+
+### Dashboard.
+
+![Screenshot](src\assets\Pennywise\image-3.png)
+
+### Budget Page.
+
+![Screenshot](src\assets\Pennywise\Budget-page.png)
 
 ## Technologies Used
 
