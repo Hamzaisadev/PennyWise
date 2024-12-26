@@ -6,7 +6,7 @@ A personal budgeting application that helps users manage their finances effectiv
 
 ## Live Demo Link
 
-[https://pennywisse.netlify.app/](https://pennywisse.netlify.app/)
+[Live Demo](https://pennywisse.netlify.app/)
 
 ## Installation Instructions
 
