@@ -1,10 +1,16 @@
 import React from "react";
-import { createExpense, deleteItem, getAllMatchingItems } from "../helper";
+import {
+  calculateSpentByBudget,
+  createExpense,
+  deleteItem,
+  getAllMatchingItems,
+} from "../helper";
 import { useLoaderData } from "react-router-dom";
 import BudgetItem from "../Components/BudgetItem";
 import AddExpenseForm from "./../Components/AddExpenseForm";
 import Table from "../Components/Table";
 import { toast } from "react-toastify";
+import { parseCurrency } from "../utils/format";
 
 export async function budgetLoader({ params }) {
   const budget = await getAllMatchingItems({
