@@ -44,19 +44,19 @@ A personal budgeting application that helps users manage their finances effectiv
 
 ### For user registration.
 
-![Screenshot](src\assets\Pennywise\Homescreen.png)
+![Screenshot](./src/assets/Pennywise/Homescreen.png)
 
 ### For Adding Budgets.
 
-![Screenshot](src\assets\Pennywise\Create-budget-page.png)
+![Screenshot](./src/assets/Pennywise/Create-budget-page.png)
 
 ### Dashboard.
 
-![Screenshot](src\assets\Pennywise\image-3.png)
+![Screenshot](./src/assets/Pennywise/image-3.png)
 
 ### Budget Page.
 
-![Screenshot](src\assets\Pennywise\Budget-page.png)
+![Screenshot](./src/assets/Pennywise/Budget-page.png)
 
 ## Technologies Used
 
